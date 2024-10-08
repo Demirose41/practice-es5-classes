@@ -1,24 +1,44 @@
 const Dog = require('./dog');
 
-class Person {
-  constructor(name, age, dogs = []) {
-    this.name = name;
-    this.age = age;
-    this.dogs = dogs;
-  }
+// class Person {
+//   constructor(name, age, dogs = []) {
+//     this.name = name;
+//     this.age = age;
+//     this.dogs = dogs;
+//   }
 
-  addDog(dog) {
-    if (!(dog instanceof Dog)) {
-      throw new TypeError("Can only add dogs!");
-    }
-    this.dogs.push(dog);
-  }
+//   addDog(dog) {
+//     if (!(dog instanceof Dog)) {
+//       throw new TypeError("Can only add dogs!");
+//     }
+//     this.dogs.push(dog);
+//   }
 
-  walkDogs() {
-    this.dogs.forEach((dog) => {
-      console.log(`walking ${dog.name}`);
-    });
+//   walkDogs() {
+//     this.dogs.forEach((dog) => {
+//       console.log(`walking ${dog.name}`);
+//     });
+//   }
+// }
+
+const Person = function (name, age, dogs = []) {
+  this.name = name;
+  this.age = age;
+  this.dogs = dogs;  
+}
+
+Person.prototype.addDog = function(dog){
+  if(dog instanceof Dog){
+    this.dogs = [...this.dogs, dog];
+  }else{
+    throw new TypeError;
   }
+}
+
+Person.prototype.walkDogs = function() {
+  this.dogs.forEach((dog) => {
+    console.log(`walking ${dog.name}`);
+  })
 }
 
 /****************************************************************************/
